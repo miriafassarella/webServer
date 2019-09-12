@@ -1,22 +1,18 @@
-const http = require('http');
+const express = require('express'); // it is the same as ( const http = require('http') )
+let routesIndex = require('./routes/index');//requesting the route from an external file
+let routesUsers = require('./routes/users');
+// (./) means don't look inside the node_modules
+let app = express(); //invoking the spress
 
-let server = http.createServer((req, res)=>{
+//telling the main file I'm using
+app.use(routesIndex);
+app.use('/users',routesUsers);
 
-    console.log('URL:', req.url);
-    console.log('METHOD:', req.method);
 
-    switch(res.url){
 
-        case "/":
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'text/html');
-            res.end('<h1>Olá</h1>');
-            break;
-    }
 
-});
-
-server.listen(9000, '127.0.0.1', ()=>{
+   
+app.listen(3000, '127.0.0.1', ()=>{
 
     console.log('Servidor rodando!');
 
