@@ -1,17 +1,16 @@
 const express = require('express'); // it is the same as ( const http = require('http') )
-let routesIndex = require('./routes/index');//requesting the route from an external file
-let routesUsers = require('./routes/users');
-// (./) means don't look inside the node_modules
+const consign = require('consign');
+const bodyParcer = require('body-parser'); //we use to interpret postman damage
+
 let app = express(); //invoking the spress
 
-//telling the main file I'm using
-app.use(routesIndex);
-app.use('/users',routesUsers);
 
+app.use(bodyParcer.urlencoded({ extended: false}));
+app.use(bodyParcer.json()); //will take the postman data and turn it into json
 
+//refers to folder name routes
+consign().include('routes').into(app); //include where? into(app).
 
-
-   
 app.listen(3000, '127.0.0.1', ()=>{
 
     console.log('Servidor rodando!');
