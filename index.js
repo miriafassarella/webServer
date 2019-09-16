@@ -5,11 +5,11 @@ const bodyParcer = require('body-parser'); //we use to interpret postman damage
 let app = express(); //invoking the spress
 
 
-app.use(bodyParcer.urlencoded({ extended: false}));
+app.use(bodyParcer.urlencoded({ extended: false})); 
 app.use(bodyParcer.json()); //will take the postman data and turn it into json
 
 //refers to folder name routes
-consign().include('routes').into(app); //include where? into(app).
+consign().include('routes').include('utils').into(app); //include where? into(app).
 
 app.listen(3000, '127.0.0.1', ()=>{
 
