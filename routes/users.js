@@ -16,6 +16,7 @@ module.exports = (app)=>{
 
             if(err){ 
                 app.utils.error.send(err, req, res);
+                
             }else{
 
         res.statusCode = 200;
@@ -30,7 +31,7 @@ module.exports = (app)=>{
     
     route.post([check('nome', 'O nome é obrigatório').not().isEmpty(),
                 check('email', 'O email é obrigatório').isEmail(),
-                check('password', 'O password é obrigatório').not().isEmpty(),], 
+                check('password', 'O password é obrigatório').not().isEmpty()], 
     
     (req, res)=>{
 
@@ -39,7 +40,7 @@ module.exports = (app)=>{
         if(!errors.isEmpty()){
 
             app.utils.error.send(errors, req, res);
-            return false;
+            return false; //console is still running
         }
 
         db.insert(req.body, (err, user)=>{ //entering data into database
@@ -70,9 +71,20 @@ module.exports = (app)=>{
          });
     });
 
-    routeId.put((req, res)=>{
+    routeId.put([check('nome', 'O nome é obrigatório').not().isEmpty(),
+    check('email', 'O email é obrigatório').isEmail(),
+    check('password', 'O password é obrigatório').not().isEmpty()], 
+    (req, res)=>{//editing a user
 
-        db.update({_id:req.params.id}, req.body, err=>{ 
+        const errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+
+            app.utils.error.send(errors, req, res);
+            return false; //console is still running
+        }
+
+    db.update({_id:req.params.id}, req.body, err=>{ //update method is of the database nedb
             if(err){
                 app.utils.error.send(err, req, res);
             }else{

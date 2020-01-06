@@ -13,7 +13,7 @@ app.use(bodyParcer.json()); //will take the postman data and turn it into json
 //refers to folder name routes
 consign().include('routes').include('utils').into(app); //include where? into(app).
 
-app.listen(3000, '127.0.0.1', ()=>{
+app.listen(4000, '127.0.0.1', ()=>{
 
     console.log('Servidor rodando!');
 
