@@ -29,9 +29,9 @@ module.exports = (app)=>{
         });
 });
     
-    route.post([check('nome', 'O nome é obrigatório').not().isEmpty(),
-                check('email', 'O email é obrigatório').isEmail(),
-                check('password', 'O password é obrigatório').not().isEmpty()], 
+    route.post([check('_name', 'O nome é obrigatório').not().isEmpty(),
+                check('_email', 'O email é obrigatório').isEmail(),
+                check('_password', 'O password é obrigatório').not().isEmpty()], 
     
     (req, res)=>{
 
@@ -71,9 +71,9 @@ module.exports = (app)=>{
          });
     });
 
-    routeId.put([check('nome', 'O nome é obrigatório').not().isEmpty(),
-    check('email', 'O email é obrigatório').isEmail(),
-    check('password', 'O password é obrigatório').not().isEmpty()], 
+    routeId.put([check('_name', 'O nome é obrigatório').not().isEmpty(),
+    check('_email', 'O email é obrigatório').isEmail(),
+    check('_password', 'O password é obrigatório').not().isEmpty()], 
     (req, res)=>{//editing a user
 
         const errors = validationResult(req);
